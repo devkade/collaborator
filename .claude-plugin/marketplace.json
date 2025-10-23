@@ -1,6 +1,9 @@
 {
   "name": "claude-plugin-marketplace",
-  "owner": "devkade",
+  "owner": {
+    "name": "devkade",
+    "url": "https://github.com/devkade"
+  },
   "description": "A curated collection of Claude skills and plugins for enhancing your Claude Code experience",
   "version": "1.0.0",
   "strict": false,
@@ -9,10 +12,7 @@
       "name": "deep-reading-framework",
       "source": "./skills/deep-reading-framework",
       "description": "Three-pass critical reading framework for systematic document analysis",
-      "version": "1.0.0",
-      "components": {
-        "skills": ["deep-reading-framework"]
-      }
+      "version": "1.0.0"
     }
   ]
 }
