@@ -17,6 +17,22 @@ Three-pass critical reading framework for systematic document analysis. Supports
 
 **Usage:** `/deep-reading-framework` or ask for deep reading analysis
 
+### oss-contribution-framework
+Comprehensive 6-phase framework for contributing to open source projects. Guides you through issue discovery, analysis, codebase exploration, issue-code mapping, solution implementation, and PR creation. Includes modular sub-skills for each phase, detailed reference materials, and ready-to-use templates.
+
+**Phases:**
+1. **Issue Discovery** - Find and evaluate suitable issues
+2. **Issue Analysis** - Deep dive into requirements and scope
+3. **Codebase Exploration** - Understand project structure and conventions
+4. **Issue-Code Mapping** - Connect requirements to code locations
+5. **Solution Implementation** - Design and implement following best practices
+6. **Documentation & PR** - Create comprehensive pull requests
+
+**Usage:**
+- Full workflow: "OSS 기여 시작" or "이 프로젝트에 기여하고 싶어"
+- Individual phases: "이슈 분석해줘", "코드베이스 구조 파악", "PR 작성"
+- Includes templates for issue analysis, codebase notes, and PR checklists
+
 ## 🔧 Adding New Plugins
 
 To add a new plugin to this marketplace:
