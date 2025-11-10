@@ -13,6 +13,12 @@
       "source": "./skills/deep-reading-framework",
       "description": "Three-pass critical reading framework for systematic document analysis",
       "version": "1.0.0"
+    },
+    {
+      "name": "oss-contribution-framework",
+      "source": "./skills/oss-contribution-framework",
+      "description": "Systematic 6-phase framework for contributing to open source projects from issue discovery to PR creation",
+      "version": "1.0.0"
     }
   ]
 }
