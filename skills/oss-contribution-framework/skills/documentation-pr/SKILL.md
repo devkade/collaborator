@@ -1,3 +1,8 @@
+---
+name: oss:documentation-pr
+description: Phase 6 of OSS contribution - Document changes and create a comprehensive, reviewable pull request. Writes clear PR description, documents code changes, creates changelog entries, and prepares for review. Use when implementation is complete and ready to submit work.
+---
+
 # Phase 6: Documentation & PR Creation
 
 Document changes and create a comprehensive, reviewable pull request.

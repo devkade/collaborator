@@ -1,3 +1,8 @@
+---
+name: oss:issue-code-mapping
+description: Phase 4 of OSS contribution - Connect issue requirements to specific code locations and modification points. Locates relevant files and functions, traces code paths, identifies modification points, and plans minimal change set. Use when ready to start implementation or finding where to make changes.
+---
+
 # Phase 4: Issue-Code Mapping
 
 Connect issue requirements to specific code locations and modification points.

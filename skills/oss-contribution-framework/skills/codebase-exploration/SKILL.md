@@ -1,3 +1,8 @@
+---
+name: oss:codebase-exploration
+description: Phase 3 of OSS contribution - Systematically understand project structure, conventions, and architecture. Maps project organization, identifies coding patterns, finds test patterns and CI/CD setup. Use when first time contributing, working on unfamiliar parts, or understanding project conventions.
+---
+
 # Phase 3: Codebase Exploration
 
 Systematically understand project structure, conventions, and architecture.

@@ -1,3 +1,8 @@
+---
+name: oss:issue-analysis
+description: Phase 2 of OSS contribution - Deep analysis of issue requirements, scope, and expected outcomes. Extracts core requirements, identifies edge cases, maps dependencies, and assesses complexity. Use when starting work on selected issue, clarifying unclear requirements, or identifying edge cases.
+---
+
 # Phase 2: Issue Analysis
 
 Deep analysis of issue requirements, scope, and expected outcomes.

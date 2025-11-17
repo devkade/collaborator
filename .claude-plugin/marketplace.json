@@ -19,6 +19,42 @@
       "source": "./skills/oss-contribution-framework",
       "description": "Systematic 6-phase framework for contributing to open source projects from issue discovery to PR creation",
       "version": "1.0.0"
+    },
+    {
+      "name": "oss-issue-discovery",
+      "source": "./skills/oss-contribution-framework/skills/issue-discovery",
+      "description": "Phase 1: Find and evaluate suitable OSS issues matching your skills and goals",
+      "version": "1.0.0"
+    },
+    {
+      "name": "oss-issue-analysis",
+      "source": "./skills/oss-contribution-framework/skills/issue-analysis",
+      "description": "Phase 2: Deep analysis of issue requirements, scope, and expected outcomes",
+      "version": "1.0.0"
+    },
+    {
+      "name": "oss-codebase-exploration",
+      "source": "./skills/oss-contribution-framework/skills/codebase-exploration",
+      "description": "Phase 3: Understand project structure, conventions, and architecture",
+      "version": "1.0.0"
+    },
+    {
+      "name": "oss-issue-code-mapping",
+      "source": "./skills/oss-contribution-framework/skills/issue-code-mapping",
+      "description": "Phase 4: Connect issue requirements to specific code locations",
+      "version": "1.0.0"
+    },
+    {
+      "name": "oss-solution-implementation",
+      "source": "./skills/oss-contribution-framework/skills/solution-implementation",
+      "description": "Phase 5: Implement solution following project standards and best practices",
+      "version": "1.0.0"
+    },
+    {
+      "name": "oss-documentation-pr",
+      "source": "./skills/oss-contribution-framework/skills/documentation-pr",
+      "description": "Phase 6: Document changes and create comprehensive pull request",
+      "version": "1.0.0"
     }
   ]
 }

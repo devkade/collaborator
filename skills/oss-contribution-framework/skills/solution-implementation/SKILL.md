@@ -1,3 +1,8 @@
+---
+name: oss:solution-implementation
+description: Phase 5 of OSS contribution - Design and implement the solution following project standards and best practices. Writes code following conventions, adds/updates tests, handles edge cases. Use when code mapping is complete and ready to write code.
+---
+
 # Phase 5: Solution Implementation
 
 Design and implement the solution following project standards and best practices.

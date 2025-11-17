@@ -1,3 +1,8 @@
+---
+name: oss:issue-discovery
+description: Phase 1 of OSS contribution - Find and evaluate suitable issues matching your skills, time, and learning goals. Filters by labels, assesses project health, and provides structured recommendations. Use when starting OSS contribution, looking for beginner-friendly issues, or evaluating multiple issue options.
+---
+
 # Phase 1: Issue Discovery & Triage
 
 Find and evaluate suitable issues to work on in open source projects.
