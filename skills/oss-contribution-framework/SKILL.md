@@ -1,6 +1,6 @@
 ---
 name: oss-contribution-framework
-description: Systematic framework for contributing to open source projects. Guides through issue discovery, analysis, codebase exploration, solution mapping, implementation, and PR creation. Use when starting OSS contributions, analyzing issues, understanding unfamiliar codebases, or creating pull requests. Includes modular sub-skills for each contribution phase.
+description: Systematic framework for contributing to open source projects. Guides through issue discovery, integrated analysis with code exploration, implementation, and PR creation. Use when starting OSS contributions, analyzing issues, or creating pull requests. Includes modular sub-skills for each contribution phase.
 ---
 
 # OSS Contribution Framework
@@ -9,23 +9,23 @@ A comprehensive, step-by-step framework for making meaningful open source contri
 
 ## Overview
 
-This framework breaks down OSS contributions into six systematic phases, each with its own dedicated sub-skill. You can use the complete workflow or invoke individual phases as needed.
+This framework breaks down OSS contributions into four systematic phases, each with its own dedicated sub-skill. You can use the complete workflow or invoke individual phases as needed.
 
 ## Quick Start
 
 **Full workflow:**
 ```
 사용자: "이 프로젝트에 기여하고 싶어" or "OSS 기여 시작"
-→ Framework guides through all 6 phases
+→ Framework guides through all 4 phases
 ```
 
 **Individual phase:**
 ```
-사용자: "이슈 분석해줘" or "코드베이스 탐색"
+사용자: "이슈 분석해줘" or "코드 구현"
 → Activates specific sub-skill
 ```
 
-## Six-Phase Workflow
+## Four-Phase Workflow
 
 ### Phase 1: Issue Discovery & Triage
 **Sub-skill:** `skills/issue-discovery.md`
@@ -43,55 +43,27 @@ Find and evaluate suitable issues to work on.
 - "beginner-friendly 이슈 추천"
 - "이 이슈가 적합한지 평가해줘"
 
-### Phase 2: Issue Analysis
+### Phase 2: Issue Analysis & Code Exploration
 **Sub-skill:** `skills/issue-analysis.md`
 
-Deep analysis of requirements, scope, and expected outcomes.
+**INTEGRATED PHASE** - Deep analysis combining requirements extraction with codebase exploration and code-level mapping.
 
 **Capabilities:**
 - Extract core requirements and acceptance criteria
-- Identify edge cases and implicit expectations
-- Map dependencies and affected components
-- Assess complexity and time estimate
+- Explore project structure and conventions
+- Locate exact files and functions to modify
+- Identify problem code and fix points
+- Trace execution paths
+- Map dependencies and impact
+- Plan specific code modifications
 
 **Triggers:**
 - "이 이슈 분석해줘"
-- "요구사항 정리"
-- "이슈 영향 범위 파악"
-
-### Phase 3: Codebase Exploration
-**Sub-skill:** `skills/codebase-exploration.md`
-
-Understand project structure, conventions, and architecture.
-
-**Capabilities:**
-- Map project structure and key directories
-- Identify coding conventions and patterns
-- Find test patterns and CI/CD setup
-- Understand build system and dependencies
-
-**Triggers:**
-- "코드베이스 구조 파악"
-- "프로젝트 컨벤션 찾기"
-- "테스트 패턴 분석"
-
-### Phase 4: Issue-Code Mapping
-**Sub-skill:** `skills/issue-code-mapping.md`
-
-Connect issue requirements to specific code locations.
-
-**Capabilities:**
-- Locate relevant files and functions
-- Trace code paths related to the issue
-- Identify modification points
-- Map test locations
-
-**Triggers:**
+- "코드에서 어디를 고쳐야 하나?"
 - "이슈와 코드 연결"
-- "수정할 파일 찾기"
-- "관련 코드 위치 파악"
+- "문제 있는 코드 찾기"
 
-### Phase 5: Solution Implementation
+### Phase 3: Solution Implementation
 **Sub-skill:** `skills/solution-implementation.md`
 
 Design and implement the solution following project standards.
@@ -107,7 +79,7 @@ Design and implement the solution following project standards.
 - "이슈 해결 시작"
 - "테스트 작성"
 
-### Phase 6: Documentation & PR
+### Phase 4: Documentation & PR
 **Sub-skill:** `skills/documentation-pr.md`
 
 Document changes and create a comprehensive pull request.
@@ -147,11 +119,9 @@ When user starts contribution workflow:
 ```markdown
 ## 🎯 Contribution Progress
 - [ ] Phase 1: Issue Discovery
-- [ ] Phase 2: Issue Analysis
-- [ ] Phase 3: Codebase Exploration
-- [ ] Phase 4: Issue-Code Mapping
-- [ ] Phase 5: Solution Implementation
-- [ ] Phase 6: Documentation & PR
+- [ ] Phase 2: Issue Analysis & Code Exploration
+- [ ] Phase 3: Solution Implementation
+- [ ] Phase 4: Documentation & PR
 
 **Current Phase:** [PHASE]
 **Repository:** [REPO]
@@ -179,11 +149,9 @@ After completing each phase, checkpoint with user:
 
 Maintain and carry forward context between phases:
 
-- **Phase 1 → 2:** Issue URL, labels, initial assessment
-- **Phase 2 → 3:** Requirements, scope, affected areas
-- **Phase 3 → 4:** Project structure, conventions, patterns
-- **Phase 4 → 5:** File locations, modification points
-- **Phase 5 → 6:** Changes made, tests added
+- **Phase 1 → 2:** Issue URL, labels, initial assessment, CONTRIBUTING.md requirements
+- **Phase 2 → 3:** Requirements, project structure, exact code locations, modification plan
+- **Phase 3 → 4:** Implementation changes, tests added, commits made
 
 ## Sub-Skill Invocation
 
@@ -236,7 +204,7 @@ The framework adapts based on:
 
 **Quality checklist:**
 
-Before moving to Phase 6 (PR), verify:
+Before moving to Phase 4 (PR), verify:
 - [ ] All requirements addressed
 - [ ] Tests pass locally
 - [ ] Code follows project conventions

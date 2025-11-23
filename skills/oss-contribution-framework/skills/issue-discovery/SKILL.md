@@ -42,12 +42,20 @@ Ask or infer:
 
 ### Step 2: Project Assessment
 
-Before searching issues, evaluate project health:
+Before searching issues, evaluate project health and read contribution guidelines:
+
+**MANDATORY: Read CONTRIBUTING.md**
+- **MUST read and understand** the repository's CONTRIBUTING.md file
+- Note required workflow, branch naming, commit conventions
+- Identify testing requirements and code style guidelines
+- Check for CLA (Contributor License Agreement) requirements
+- Understand PR submission process and review expectations
+- **All subsequent phases MUST follow these guidelines**
 
 **Health indicators:**
 - Recent commit activity (last 7-30 days)
 - Responsive maintainers (issue/PR response time)
-- Clear contribution guidelines
+- Clear contribution guidelines (CONTRIBUTING.md present)
 - Active community (discussions, recent merges)
 - Good documentation
 
@@ -64,7 +72,8 @@ Output format:
 - **Activity:** [recent commits/releases]
 - **Responsiveness:** [avg maintainer response time]
 - **Community:** [# contributors, discussion activity]
-- **Documentation:** [CONTRIBUTING.md, docs quality]
+- **CONTRIBUTING.md:** ✅ Read and understood / ⚠️ Unclear / ❌ Missing
+  - Key requirements: [workflow, testing, style, etc.]
 - **Assessment:** ✅ Good to contribute / ⚠️ Proceed with caution / ❌ Not recommended
 ```
 
@@ -72,10 +81,21 @@ Output format:
 
 Use multiple filters to find candidates:
 
-**By label:**
-- `good first issue`, `beginner-friendly`, `help wanted`
+**Critical filters (MUST apply):**
+- **No linked PR:** Exclude issues that already have associated pull requests
+  - Check issue references, linked PRs in GitHub UI
+  - Skip issues marked "has-pr" or with PR links in comments
+- **Beginner-friendly priority:** Focus on accessible issues
+  - Labels: `good first issue`, `beginner-friendly`, `help wanted`
+  - Labels: `up-for-grabs`, `easy`, `low-hanging-fruit`
+- **High priority labels:** Prioritize important work
+  - Look for: `priority: high`, `high-priority`, `important`, `urgent`
+  - Repository-specific priority indicators
+  - Issues referenced in roadmap or milestones
+
+**By issue type:**
 - `documentation`, `bug`, `enhancement`
-- `up-for-grabs`, `easy`, `low-hanging-fruit`
+- Prefer well-scoped, clearly defined issues
 
 **By complexity:**
 - **Simple (1-4 hours):** Typos, docs, simple bugs, config changes
@@ -113,6 +133,7 @@ For each candidate issue, assess:
 
 #### Warning Signs ⚠️
 
+- **Has linked PR** - Issue already being worked on
 - Vague or unclear requirements
 - No maintainer response
 - Already assigned to someone

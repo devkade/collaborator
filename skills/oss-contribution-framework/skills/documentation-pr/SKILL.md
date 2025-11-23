@@ -1,9 +1,9 @@
 ---
 name: oss:documentation-pr
-description: Phase 6 of OSS contribution - Document changes and create a comprehensive, reviewable pull request. Writes clear PR description, documents code changes, creates changelog entries, and prepares for review. Use when implementation is complete and ready to submit work.
+description: Phase 4 of OSS contribution - Document changes and create a comprehensive, reviewable pull request. Writes clear PR description, documents code changes, creates changelog entries, and prepares for review. Use when implementation is complete and ready to submit work.
 ---
 
-# Phase 6: Documentation & PR Creation
+# Phase 4: Documentation & PR Creation
 
 Document changes and create a comprehensive, reviewable pull request.
 
@@ -32,12 +32,31 @@ Create a pull request that:
 
 ## PR Creation Framework
 
+### Step 0: CONTRIBUTING.md Final Verification
+
+**MANDATORY: Final compliance check before PR submission**
+- Review CONTRIBUTING.md requirements from Phase 1 one last time
+- Verify ALL requirements are met:
+  - Code style and formatting standards
+  - Commit message format and conventions
+  - Branch naming requirements
+  - Testing requirements
+  - Documentation standards
+  - PR submission process
+- **PR MUST strictly follow all CONTRIBUTING.md guidelines**
+
 ### Step 1: Pre-PR Checklist
 
 Verify everything is ready before creating PR.
 
 ```markdown
 ### Pre-PR Checklist
+
+**CONTRIBUTING.md Compliance:**
+- [ ] All contribution guidelines followed
+- [ ] Commit messages follow required format
+- [ ] Branch named according to conventions
+- [ ] Code style matches project standards
 
 **Code quality:**
 - [ ] All tests pass locally
@@ -84,8 +103,11 @@ Ensure clean branch state.
 
 **Branch best practices:**
 
+**IMPORTANT: Follow CONTRIBUTING.md branch naming conventions**
+
 ```bash
-# Create feature branch (if not done)
+# Create feature branch following project conventions
+# Check CONTRIBUTING.md for required format (e.g., feature/, fix/, etc.)
 git checkout -b feature/issue-123-description
 
 # Update from main
@@ -107,10 +129,15 @@ git rebase -i origin/main
 
 **Commit message quality:**
 
+**IMPORTANT: Follow CONTRIBUTING.md commit message format**
+- Check project's required commit message convention
+- Some projects use Conventional Commits, others have custom formats
+- Verify before writing commit messages
+
 ```markdown
 ### Good Commit Messages
 
-**Format:**
+**Format (verify with CONTRIBUTING.md):**
 ```
 type(scope): brief description
 
@@ -799,11 +826,11 @@ Thank you for contributing to open source!
 
 When invoked from main framework:
 
-1. **Receive context:** Implemented changes, test results, branch state
+1. **Receive context:** Implemented changes from Phase 3, test results, branch state
 2. **Guide documentation:** PR title, description, checklist
 3. **Verify readiness:** All quality checks met
 4. **Return PR content:** Ready to copy/paste or submit
-5. **Update tracker:** Mark Phase 6 complete - contribution done!
+5. **Update tracker:** Mark Phase 4 complete - contribution done!
 
 This completes the full OSS contribution workflow.
 

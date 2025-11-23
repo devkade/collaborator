@@ -1,9 +1,9 @@
 ---
 name: oss:solution-implementation
-description: Phase 5 of OSS contribution - Design and implement the solution following project standards and best practices. Writes code following conventions, adds/updates tests, handles edge cases. Use when code mapping is complete and ready to write code.
+description: Phase 3 of OSS contribution - Design and implement the solution following project standards and best practices. Writes code following conventions, adds/updates tests, handles edge cases. Use when issue analysis is complete and ready to write code.
 ---
 
-# Phase 5: Solution Implementation
+# Phase 3: Solution Implementation
 
 Design and implement the solution following project standards and best practices.
 
@@ -25,12 +25,25 @@ Transform the implementation plan into working code that:
 - "테스트 작성"
 
 **Use when:**
-- Code mapping is complete
+- Issue analysis (Phase 2) is complete
+- Code locations identified
 - Ready to write code
 - Need implementation guidance
 - Want to follow best practices
 
 ## Implementation Framework
+
+### Step 0: CONTRIBUTING.md Compliance Check
+
+**MANDATORY: Final verification before implementation**
+- Review all CONTRIBUTING.md requirements from Phase 1
+- Ensure implementation will follow:
+  - Code style and formatting standards
+  - Commit message format
+  - Branch naming conventions
+  - Testing requirements
+  - Documentation standards
+- **All code written MUST strictly follow these guidelines**
 
 ### Step 1: Implementation Planning
 
@@ -722,7 +735,7 @@ git log --oneline origin/main..HEAD
 
 ## Next Steps
 
-✅ Implementation complete - Ready for **Phase 6: Documentation & PR**
+✅ Implementation complete - Ready for **Phase 4: Documentation & PR**
 
 **Before PR:**
 - [ ] Final review
@@ -735,14 +748,14 @@ git log --oneline origin/main..HEAD
 
 When invoked from main framework:
 
-1. **Receive context:** Code mapping, requirements, modification points
+1. **Receive context:** Issue analysis from Phase 2, requirements, code locations
 2. **Guide implementation:** Step-by-step with quality checks
 3. **Verify completion:** All requirements met, tests pass
 4. **Return summary:** What was implemented and how
-5. **Update tracker:** Mark Phase 5 complete
+5. **Update tracker:** Mark Phase 3 complete
 6. **Transition:** Ready for documentation and PR creation
 
-Implementation phase may iterate with Phase 4 if code structure different than expected.
+Implementation phase may iterate with Phase 2 if code structure different than expected.
 
 ## Incremental Development
 

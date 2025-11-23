@@ -1,98 +1,66 @@
 ---
 name: oss:issue-analysis
-description: Phase 2 of OSS contribution - Deep analysis of issue requirements, scope, and expected outcomes. Extracts core requirements, identifies edge cases, maps dependencies, and assesses complexity. Use when starting work on selected issue, clarifying unclear requirements, or identifying edge cases.
+description: Phase 2 of OSS contribution - Deep analysis combining issue requirements with codebase exploration. Extracts requirements, explores code structure, identifies exact code locations to fix, traces execution paths, and maps code-level changes needed. Use when starting work on selected issue.
 ---
 
-# Phase 2: Issue Analysis
+# Phase 2: Issue Analysis & Code Exploration
 
-Deep analysis of issue requirements, scope, and expected outcomes.
+Deep analysis of issue requirements combined with codebase exploration to identify exact code changes needed.
 
 ## Purpose
 
-Transform an issue description into a clear, actionable understanding of:
-- What exactly needs to be done
-- Why it's needed
-- What success looks like
-- What the constraints and edge cases are
+Transform an issue into actionable code-level understanding by:
+- **Understanding requirements:** What needs to be done and why
+- **Exploring codebase:** Project structure, conventions, patterns
+- **Locating code:** Find exact files/functions to modify
+- **Identifying problems:** Pinpoint broken/missing code
+- **Planning changes:** Map requirements to specific code modifications
 
 ## When to Use
 
 **Triggers:**
 - "이 이슈 분석해줘"
-- "요구사항 정리"
-- "이슈 영향 범위 파악"
-- "무엇을 구현해야 하는지 명확하게 해줘"
+- "코드에서 어디를 고쳐야 하나?"
+- "이슈와 코드 연결"
+- "문제 있는 코드 찾기"
 
 **Use when:**
 - Starting work on a selected issue
-- Issue description is unclear
-- Need to confirm understanding before coding
-- Want to identify edge cases early
+- Need to understand both requirements AND code
+- Want to identify exact modification points
+- Ready to plan implementation
 
-## Analysis Framework
+## Integrated Analysis Framework
 
-### Step 1: Issue Type Detection
+### Step 0: Review CONTRIBUTING.md Requirements
 
-Identify the type of issue to apply appropriate analysis pattern:
+**MANDATORY: Before analyzing the issue, review project contribution guidelines**
+- Refer to CONTRIBUTING.md read in Phase 1
+- Ensure your analysis aligns with project conventions
+- Note any specific requirements for:
+  - Code style and formatting
+  - Testing requirements
+  - Documentation standards
+  - Commit message format
+  - Branch naming conventions
+
+**All analysis and subsequent work MUST comply with these guidelines**
+
+### Step 1: Issue Type & Requirements Extraction
+
+Identify issue type and extract core requirements.
+
+**Issue Types:**
 
 **Bug Fix:**
-- Current behavior (broken)
-- Expected behavior (correct)
-- Reproduction steps
-- Root cause (if known)
-
-**Feature Request:**
-- User need/problem
-- Proposed solution
-- Acceptance criteria
-- Use cases
-
-**Refactoring:**
-- Current code problems
-- Desired improvements
-- Constraints (maintain behavior)
-- Quality metrics
-
-**Documentation:**
-- Missing/unclear content
-- Target audience
-- Required information
-- Format/location
-
-**Performance:**
-- Current metrics
-- Target metrics
-- Affected scenarios
-- Constraints
-
-**Chore/Maintenance:**
-- Technical debt item
-- Reason for change
-- Scope of work
-- Dependencies
-
-### Step 2: Core Requirements Extraction
-
-Parse the issue to extract concrete requirements.
-
-#### For Bug Fixes
-
-**Extract:**
-- **Problem:** What is broken?
-- **Impact:** Who is affected? How severely?
-- **Environment:** What versions, platforms, conditions?
-- **Expected outcome:** What should happen instead?
-- **Acceptance:** How to verify it's fixed?
-
-**Template:**
 ```markdown
-### Bug Analysis
+### Bug Analysis Template
 
 **Current Behavior:**
 [What actually happens - be specific]
 
 **Expected Behavior:**
-[What should happen - reference docs/specs if available]
+[What should happen - reference docs/specs]
 
 **Reproduction Steps:**
 1. [Step 1]
@@ -102,27 +70,15 @@ Parse the issue to extract concrete requirements.
 **Environment:**
 - Version: [version]
 - Platform: [OS/browser/etc]
-- Configuration: [relevant settings]
 
-**Root Cause (Hypothesis):**
-[Your initial theory of what's causing this]
-
-**Affected Users:**
-[Who hits this? How often? Severity: Critical/High/Medium/Low]
+**Impact:**
+- Severity: [Critical/High/Medium/Low]
+- Affected users: [who/how many]
 ```
 
-#### For Features
-
-**Extract:**
-- **User story:** Who wants this and why?
-- **Functionality:** What should it do?
-- **Interface:** How do users interact with it?
-- **Integration:** How does it fit into existing system?
-- **Success metrics:** How to measure success?
-
-**Template:**
+**Feature Request:**
 ```markdown
-### Feature Analysis
+### Feature Analysis Template
 
 **User Story:**
 As a [user type], I want [capability] so that [benefit].
@@ -132,38 +88,19 @@ As a [user type], I want [capability] so that [benefit].
 2. [Requirement 2 - must have]
 3. [Requirement 3 - nice to have]
 
-**User Interface:**
-- **Input:** [What user provides]
-- **Output:** [What user sees/gets]
-- **Interaction flow:** [Step-by-step user journey]
-
 **Acceptance Criteria:**
 - [ ] [Criterion 1 - specific and testable]
 - [ ] [Criterion 2]
 - [ ] [Criterion 3]
-
-**Non-Functional Requirements:**
-- Performance: [any constraints]
-- Compatibility: [versions, platforms]
-- Accessibility: [considerations]
 ```
 
-#### For Refactoring
-
-**Extract:**
-- **Current problems:** Code smells, tech debt
-- **Desired state:** What good looks like
-- **Constraints:** Must not break functionality
-- **Scope:** What's in and out of scope
-
-**Template:**
+**Refactoring:**
 ```markdown
-### Refactoring Analysis
+### Refactoring Analysis Template
 
 **Current Problems:**
 1. [Problem 1: e.g., duplicated code across X files]
 2. [Problem 2: e.g., poor separation of concerns]
-3. [Problem 3: e.g., difficult to test]
 
 **Desired Outcome:**
 [What the code should look like after refactoring]
@@ -172,329 +109,714 @@ As a [user type], I want [capability] so that [benefit].
 - [ ] No behavior changes
 - [ ] All existing tests must pass
 - [ ] No API changes (if library)
-- [ ] [Other constraints]
-
-**Refactoring Scope:**
-- Files affected: [list]
-- Functions/classes to change: [list]
-- Out of scope: [what not to touch]
 ```
 
-### Step 3: Implicit Requirements Discovery
+### Step 2: Project Structure & Convention Understanding
 
-Find the unwritten expectations and edge cases.
+Explore codebase to understand organization and conventions.
 
-**Ask critical questions:**
+**A. Directory Structure Mapping:**
 
-**Boundary conditions:**
-- What happens with empty input?
-- What about very large input?
-- Maximum/minimum values?
-- Null/undefined handling?
+```bash
+# Get project overview
+tree -L 2 -d
 
-**Error scenarios:**
-- Network failures?
-- Invalid input?
-- Permissions issues?
-- Resource exhaustion?
+# Identify key directories
+ls -la
+```
 
-**Integration points:**
-- How does this interact with existing features?
-- What other parts depend on this?
-- What breaks if this changes?
-- Backwards compatibility needed?
+```markdown
+### Project Structure
 
-**User experience:**
-- Loading states?
-- Error messages?
-- Accessibility?
-- Mobile/responsive?
+**Main source:** [path to primary code]
+
+**Key directories:**
+- `src/` or `lib/` - Main source code
+- `tests/` or `__tests__/` - Test files
+- `docs/` - Documentation
+- `.github/` - CI/CD, workflows
+
+**Organization principle:**
+- [x] By feature (e.g., /users, /products)
+- [ ] By layer (e.g., /models, /views, /controllers)
+- [ ] By type (e.g., /components, /utils, /services)
+
+**Technologies:**
+- Language: [language + version]
+- Framework: [framework]
+- Build tool: [npm/cargo/maven/etc]
+- Testing: [jest/pytest/etc]
+```
+
+**B. Code Conventions Discovery:**
+
+```bash
+# Check for style configs
+cat .prettierrc .eslintrc package.json
+
+# Find naming patterns
+find src -type f -name "*.js" | head -10
+```
+
+```markdown
+### Code Conventions
+
+**File Naming:**
+- Components: [e.g., PascalCase.tsx]
+- Utilities: [e.g., camelCase.ts]
+- Tests: [e.g., file.test.js or file_test.go]
+
+**Code Style:**
+- Indentation: [2 spaces / 4 spaces / tabs]
+- Quotes: [single / double]
+- Import order: [external, internal, relative]
+
+**Naming Patterns:**
+- Classes: [PascalCase]
+- Functions: [camelCase / snake_case]
+- Constants: [UPPER_SNAKE_CASE]
+```
+
+**C. Testing Patterns:**
+
+```bash
+# Find test locations
+find . -name "*test*" -type f | head -5
+
+# Check test framework
+cat package.json | grep -A5 "scripts"
+```
+
+```markdown
+### Testing Strategy
+
+**Test Location:**
+- Unit tests: [e.g., __tests__/, alongside source]
+- Integration tests: [location]
+
+**Test Framework:** [Jest / pytest / go test / etc]
+
+**Test Naming Pattern:**
+- [describe/test, test_, Test*]
+
+**Run Commands:**
+```bash
+npm test              # All tests
+npm test -- file.test.js  # Specific test
+npm test -- --coverage    # With coverage
+```
+```
+
+### Step 3: Code Location Discovery
+
+Find exact files and functions related to the issue.
+
+**A. Entry Point Discovery:**
+
+```bash
+# For UI bugs/features - find component
+rg "ComponentName" --type tsx
+rg "class.*ComponentName"
+
+# For API/backend - find endpoint
+rg "app\.(get|post|put).*endpoint"
+rg "@app.route|router"
+
+# For CLI - find command
+rg "subcommand|command.*name"
+
+# For library - find exported function
+rg "export (function|class|const).*functionName"
+```
+
+```markdown
+### Entry Points
+
+**Primary entry point:**
+- File: `src/components/UserProfile.tsx:45`
+- Function/Component: `UserProfile`
+- Purpose: [what this code does]
+
+**How to trigger:**
+[Steps to reach this code - e.g., click button, call API]
+```
+
+**B. Find Similar/Related Code:**
+
+```bash
+# Find similar features for reference
+rg "similar-feature" --type js
+
+# Find similar patterns
+find . -name "*Similar*.js"
+
+# Find related tests
+rg "describe.*YourFeature" tests/
+```
+
+```markdown
+### Reference Examples
+
+**Similar code to reference:**
+1. `src/components/UserSettings.tsx:120`
+   - Similar pattern for form handling
+   - Shows validation approach
+
+2. `src/utils/validation.ts:45`
+   - Input validation logic
+   - Error handling pattern
+```
+
+### Step 4: Code-Level Problem Identification
+
+**THIS IS THE CRITICAL STEP - Find exact code that needs fixing**
+
+**A. For Bug Fixes - Trace to Root Cause:**
+
+```bash
+# Search for error message or symptom
+rg "error message text"
+
+# Find function definitions
+rg "function buggyFunction|def buggy_function"
+
+# Find all callers
+rg "buggyFunction\("
+```
+
+```markdown
+### Bug Root Cause Analysis
+
+**Symptom Location:**
+- File: `src/auth/session.ts:78`
+- Function: `validateSession`
+- Problem: Crashes when `user` is null
+
+**Code Analysis:**
+```typescript
+// CURRENT CODE (BROKEN)
+function validateSession(sessionId: string) {
+  const session = getSession(sessionId)
+  return session.user.id  // ❌ CRASHES if user is null
+}
+```
+
+**Root Cause:**
+- Missing null check for `session.user`
+- Happens during logout race condition
+
+**Needs to be changed to:**
+```typescript
+// FIXED CODE
+function validateSession(sessionId: string) {
+  const session = getSession(sessionId)
+  if (!session?.user) {  // ✅ Add null check
+    return null
+  }
+  return session.user.id
+}
+```
+
+**Additional locations to check:**
+- [ ] `src/auth/logout.ts:34` - may have similar issue
+- [ ] `src/auth/session.test.ts` - add test for null user
+```
+
+**B. For Features - Identify Where to Add Code:**
+
+```bash
+# Find where similar features are implemented
+rg "similar feature" --type js
+
+# Find integration points
+rg "import.*Component|from.*module"
+```
+
+```markdown
+### Feature Implementation Points
+
+**Where to add code:**
+
+**1. New function needed:**
+- Location: `src/utils/export.ts` (new file)
+- Function: `exportToCSV(data, options)`
+- Based on: `src/utils/exportToJSON.ts` (similar pattern)
+
+**2. UI Integration:**
+- File: `src/components/DataTable.tsx:120`
+- Add: Export button in toolbar
+- Pattern: Follow existing "Download" button at line 115
+
+**3. Hook into existing flow:**
+- File: `src/components/DataTable.tsx:45`
+- Add: Import new export function
+- Call: On button click handler
+
+**Code to add:**
+```typescript
+// In DataTable.tsx
+import { exportToCSV } from '@/utils/export'
+
+// Around line 120, add:
+<Button onClick={() => exportToCSV(data, { headers: true })}>
+  Export CSV
+</Button>
+```
+```
+
+**C. For Refactoring - Map Code Smells:**
+
+```bash
+# Find duplicated code
+rg -A10 "duplicated pattern"
+
+# Find long functions
+# (Manual inspection)
+```
+
+```markdown
+### Refactoring Map
+
+**Code smells identified:**
+
+**1. Duplicated validation logic:**
+- `src/auth/login.ts:34-50` (17 lines)
+- `src/auth/register.ts:28-44` (17 lines)
+- `src/auth/resetPassword.ts:15-31` (17 lines)
+
+**Solution:**
+- Extract to: `src/auth/validators.ts`
+- New function: `validateUserInput(input)`
+- Replace 3 duplications with function call
+
+**2. God function:**
+- `src/api/userController.ts:100-350` (250 lines!)
+- Does: validation + business logic + DB + response
+
+**Solution:**
+- Split into:
+  - `validateUserData()` at line 100
+  - `createUser()` at line 150
+  - `sendWelcomeEmail()` at line 200
+```
+
+### Step 5: Execution Path Tracing
+
+Trace code flow to understand full context.
+
+```markdown
+### Execution Flow
+
+**For [bug/feature]: [description]**
+
+```
+1. Entry: src/components/Login.tsx:89 - handleSubmit()
+   └─> Calls: validateCredentials(username, password)
+
+2. Flow: src/auth/validation.ts:23 - validateCredentials()
+   └─> Calls: checkPassword(password)
+   └─> Returns: {valid: boolean, error?: string}
+
+3. Bug: src/auth/validation.ts:45 - checkPassword()
+   └─> ❌ PROBLEM: Doesn't handle null password
+   └─> FIX: Add null check at line 46
+
+4. Result: Returns to handleSubmit, shows error
+```
+
+**Key functions in flow:**
+- `handleSubmit()` @ Login.tsx:89 - Form submission
+- `validateCredentials()` @ validation.ts:23 - Main validator
+- `checkPassword()` @ validation.ts:45 - ❌ NEEDS FIX HERE
+
+**Data transformations:**
+- Input: `{username: string, password: string}`
+- Validation: checks format, length, special chars
+- Output: `{valid: boolean, error?: string}`
+```
+
+### Step 6: Dependency & Impact Analysis
+
+Understand what depends on your changes.
+
+```bash
+# Find all callers
+rg "functionName\("
+
+# Find all imports
+rg "import.*ModuleName"
+
+# Find test coverage
+rg "describe.*functionName" tests/
+```
+
+```markdown
+### Dependencies & Impact
+
+**Upstream (what calls this code):**
+- `src/components/Login.tsx:89` - Login form
+- `src/components/Register.tsx:67` - Registration form
+- `src/api/authController.ts:120` - API endpoint
+
+**Impact of change:**
+- 🟢 Low risk - adding validation only
+- All callers already handle error case
+- Existing tests cover error path
+
+**Downstream (what this calls):**
+- `src/utils/crypto.ts:hashPassword()` - crypto library
+- `src/models/User.ts:findByUsername()` - DB query
+
+**Side effects:**
+- None - pure validation function
+- No state mutations
+- No external calls
+
+**Test coverage:**
+- Current: `tests/auth/validation.test.ts`
+- Need to add: test case for null password
+```
+
+### Step 7: Modification Plan
+
+Create concrete plan of what code to change.
+
+```markdown
+### Modification Plan
+
+**Files to modify:**
+
+**1. PRIMARY FIX: src/auth/validation.ts**
+- **Line 45-50:** Function `checkPassword()`
+- **Change type:** Add null/undefined check
+- **Before:**
+```typescript
+function checkPassword(password: string): boolean {
+  return password.length >= 8  // ❌ Crashes if null
+}
+```
+- **After:**
+```typescript
+function checkPassword(password: string | null): boolean {
+  if (!password) {  // ✅ Add null check
+    return false
+  }
+  return password.length >= 8
+}
+```
+- **Risk:** 🟢 Low - defensive programming
+
+**2. ADD TEST: tests/auth/validation.test.ts**
+- **Line:** After line 67 (add new test case)
+- **Add:**
+```typescript
+it('should return false for null password', () => {
+  expect(checkPassword(null)).toBe(false)
+})
+```
+
+**3. UPDATE TYPES: src/types/auth.ts** (if needed)
+- **Line 12:** Update PasswordInput type to allow null
+
+**Files NOT to change:**
+- ❌ `src/components/Login.tsx` - already handles errors correctly
+- ❌ `src/api/authController.ts` - no changes needed
+```
+
+### Step 8: Edge Cases & Implicit Requirements
+
+Identify edge cases from code analysis.
+
+```markdown
+### Edge Cases Discovered
+
+**From code inspection:**
+- [ ] Null password: `checkPassword(null)` - FOUND in code trace
+- [ ] Empty string: `checkPassword("")` - check if handled
+- [ ] Very long password: `checkPassword("x".repeat(10000))` - DOS risk?
+- [ ] Unicode characters: `checkPassword("パスワード")` - supported?
+- [ ] SQL injection: `checkPassword("' OR 1=1--")` - sanitized?
+
+**Integration concerns:**
+- Depends on: crypto library (trusted)
+- Affects: Login, Register, Reset Password flows
+- Breaking change: No - only adding validation
 
 **Performance:**
-- Expected load?
-- Response time requirements?
-- Memory constraints?
-- Scalability concerns?
+- No loops or heavy computation
+- O(1) complexity
+- No performance concerns
 
 **Security:**
-- Input validation?
-- Authorization checks?
-- Data sanitization?
-- Privacy implications?
-
-**Output format:**
-```markdown
-### Edge Cases & Implicit Requirements
-
-**Boundary Conditions:**
-- [ ] Empty input: [how to handle]
-- [ ] Large data: [limits, pagination]
-- [ ] Special characters: [escaping, validation]
-
-**Error Handling:**
-- [ ] Network failure: [retry logic, user feedback]
-- [ ] Invalid input: [validation, error messages]
-- [ ] Permissions: [who can do what]
-
-**Integration Concerns:**
-- Depends on: [list dependencies]
-- Affects: [list affected components]
-- Breaking change: Yes ⚠️ / No ✅
-
-**Non-Functional:**
-- Performance: [requirements or concerns]
-- Security: [validations needed]
-- Accessibility: [ARIA, keyboard nav, etc]
+- Input validation ✅
+- No sensitive data logged
+- Follow OWASP guidelines
 ```
 
-### Step 4: Scope Definition
+### Step 9: Acceptance Criteria & Scope
 
-Clearly define what's included and excluded.
+Define concrete success criteria and scope.
 
-**Determine scope:**
-
-**Minimal viable solution:**
-- Core functionality only
-- Essential edge cases
-- Basic tests
-- Minimal documentation
-
-**Complete solution:**
-- Full functionality
-- All edge cases
-- Comprehensive tests
-- Full documentation
-- Performance optimization
-
-**Out of scope:**
-- Related but separate issues
-- Future enhancements
-- Unrelated refactoring
-
-**Template:**
 ```markdown
 ### Scope Definition
 
-**In Scope (Minimal):**
-1. [Must-have item 1]
-2. [Must-have item 2]
-3. [Must-have item 3]
-
-**In Scope (If Time Permits):**
-1. [Nice-to-have item 1]
-2. [Nice-to-have item 2]
+**In Scope:**
+1. Add null check to `checkPassword()` function
+2. Add unit test for null password case
+3. Verify no crashes on null input
 
 **Out of Scope:**
-1. [Item to defer - with reason]
-2. [Item to defer - with reason]
+1. Password strength improvements (separate issue #456)
+2. UI error message improvements (separate issue #457)
+3. Refactoring validation.ts (not requested)
 
-**Dependencies:**
-- Blocked by: [list blocking issues]
-- Blocks: [list issues waiting on this]
+**Complexity:** 🟢 Simple (< 2 hours)
+- Single function change
+- One test case addition
+- Low risk change
 
-**Estimated Complexity:**
-🟢 Simple (< 4 hours)
-🟡 Moderate (1-2 days)
-🔴 Complex (3+ days)
-
-**Complexity Factors:**
-- [Factor 1: e.g., need to learn new API]
-- [Factor 2: e.g., touching critical code path]
-```
-
-### Step 5: Acceptance Criteria
-
-Define specific, testable conditions for "done".
-
-**Good acceptance criteria are:**
-- **Specific:** No ambiguity
-- **Testable:** Can verify objectively
-- **Complete:** Cover all requirements
-- **Achievable:** Within scope
-
-**Format:**
-```markdown
 ### Acceptance Criteria
 
 **Functional:**
-- [ ] [Action] results in [observable outcome]
-- [ ] [Condition] produces [expected result]
-- [ ] [Feature] works with [existing feature]
+- [ ] `checkPassword(null)` returns `false` (no crash)
+- [ ] `checkPassword(undefined)` returns `false` (no crash)
+- [ ] `checkPassword("valid")` still works correctly
+- [ ] Existing tests still pass
 
 **Quality:**
-- [ ] All new code has tests (coverage > X%)
-- [ ] No new linting errors
-- [ ] Documentation updated
-- [ ] Existing tests pass
+- [ ] New test added and passing
+- [ ] No linting errors
+- [ ] Type definitions updated
+- [ ] Code follows project conventions
 
-**Edge Cases:**
-- [ ] [Edge case 1] handled correctly
-- [ ] [Edge case 2] shows appropriate error
-
-**Integration:**
-- [ ] Works on [platform 1]
-- [ ] Compatible with [version X]
-- [ ] No breaking changes (or documented)
+**Verification:**
+```bash
+npm test                    # All tests pass
+npm run lint               # No errors
+npm run type-check         # No type errors
 ```
 
-### Step 6: Questions for Maintainer
-
-Identify what's still unclear and needs clarification.
-
-**Prepare questions:**
-- Specific, not vague
-- Show you've done research
-- Offer potential solutions
-- Respect maintainer's time
-
-**Question template:**
-```markdown
-### Questions for Maintainer
-
-Before starting implementation, I'd like to clarify:
-
-1. **[Specific aspect]**
-   - Current understanding: [what you think]
-   - Question: [what's unclear]
-   - Options: [potential approaches A, B, C]
-   - Preference: [your recommendation and why]
-
-2. **[Edge case handling]**
-   - Scenario: [describe edge case]
-   - Question: Should this [A] or [B]?
-   - Precedent: [similar handling elsewhere in codebase, if found]
-
-3. **[Technical approach]**
-   - Question: Prefer [approach A] or [approach B]?
-   - Tradeoffs:
-     - A: [pros and cons]
-     - B: [pros and cons]
+**Manual testing:**
+1. Open login form
+2. Submit with empty password
+3. Verify: No crash, shows error message
 ```
 
 ## Analysis Patterns by Issue Type
 
-### Bug Analysis Pattern
+### Bug Fix Pattern
 
-1. Reproduce the bug locally
-2. Identify the failing component
-3. Trace the code path
-4. Hypothesize root cause
-5. Identify fix location
-6. Consider side effects
+1. **Understand symptom** - Read issue description
+2. **Reproduce locally** - Follow reproduction steps
+3. **Explore codebase** - Find project structure
+4. **Locate bug** - Trace code to root cause
+5. **Identify fix point** - Exact line to change
+6. **Plan changes** - What code to modify
+7. **Consider side effects** - Impact analysis
 
-### Feature Analysis Pattern
+### Feature Pattern
 
-1. Understand user need
-2. Survey existing solutions
-3. Design API/interface
-4. Map integration points
-5. Identify implementation approach
-6. Consider extensibility
+1. **Understand need** - User story, use cases
+2. **Explore codebase** - Structure and conventions
+3. **Find similar features** - Reference implementations
+4. **Identify integration points** - Where to add code
+5. **Plan new code** - What to create
+6. **Map dependencies** - What it will interact with
+7. **Design interface** - API, props, parameters
 
-### Refactoring Analysis Pattern
+### Refactoring Pattern
 
-1. Measure current code quality
-2. Identify specific problems
-3. Define quality targets
-4. Plan incremental steps
-5. Identify test strategy
-6. Consider risk mitigation
-
-## Common Pitfalls
-
-**Avoid:**
-
-❌ **Assuming requirements** - Always verify understanding
-❌ **Scope creep** - Stick to issue scope
-❌ **Ignoring edge cases** - They matter!
-❌ **Skipping questions** - Ask before coding
-❌ **Not checking discussions** - Read all comments
-❌ **Over-engineering** - Match project's complexity level
+1. **Identify code smell** - What's wrong
+2. **Explore codebase** - Understand context
+3. **Map all instances** - Find all occurrences
+4. **Plan extraction** - New structure
+5. **Ensure test coverage** - Safety net
+6. **Plan incremental steps** - Small safe changes
+7. **Verify no behavior change** - Tests still pass
 
 ## Output Format
 
-Provide comprehensive analysis:
+Provide comprehensive analysis with code-level details:
 
 ```markdown
-# 📋 Issue Analysis: [Issue Title]
+# 🔍 Issue Analysis: [Issue Title]
 
-**Issue:** #[number] | **Type:** [bug/feature/refactor/docs]
-**URL:** [link]
-**Status:** Ready to implement / Needs clarification
+**Issue:** #[number] | **Type:** [bug/feature/refactor]
+**Status:** Ready to implement
 
 ---
 
 ## Summary
-[2-3 sentence summary of what needs to be done and why]
+[2-3 sentences: what needs to be done, what code needs to change, why]
 
 ---
 
 ## Requirements
 
-### Core Requirements
-[Structured extraction based on issue type]
+### Issue Requirements
+[What user/maintainer wants]
 
-### Edge Cases
-[List of edge cases and how to handle them]
+### Code Requirements
+[What code needs to change based on exploration]
 
-### Scope
-- **In scope:** [list]
-- **Out of scope:** [list]
-- **Complexity:** [estimate]
+---
+
+## Project Understanding
+
+### Structure
+[Key directories and organization]
+
+### Conventions
+[Naming, style, patterns to follow]
+
+### Testing
+[Framework, location, how to run]
+
+---
+
+## Code Analysis
+
+### Entry Points
+- [File:line - function/component name]
+
+### Problem Code Identified
+
+**File: [path]**
+**Line: [number]**
+**Function: [name]**
+
+**Current code (BROKEN):**
+```language
+[actual problematic code]
+```
+
+**Problem:**
+- [what's wrong]
+- [why it breaks]
+
+**Fix needed:**
+```language
+[corrected code]
+```
+
+### Execution Flow
+```
+[trace from entry to problem]
+```
+
+---
+
+## Modification Plan
+
+### Files to Change
+
+**1. [file path]**
+- **Line:** [number]
+- **Function:** [name]
+- **Change:** [specific modification]
+- **Before/After:** [code snippets]
+
+**2. [test file]**
+- **Add:** [new test cases]
+
+### Impact Analysis
+- **Upstream callers:** [list]
+- **Risk:** 🟢/🟡/🔴
+- **Breaking change:** Yes/No
+
+---
+
+## Testing Plan
+
+**Existing tests to verify:**
+- [test file:description]
+
+**New tests to add:**
+- [ ] Test case 1: [description]
+- [ ] Test case 2: [description]
+
+**Test commands:**
+```bash
+npm test
+npm test -- specific.test.js
+```
+
+---
+
+## Edge Cases
+- [ ] [Edge case 1 - how to handle]
+- [ ] [Edge case 2 - how to handle]
 
 ---
 
 ## Acceptance Criteria
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
-- [ ] [Criterion 3]
+- [ ] [Specific, testable criterion 1]
+- [ ] [Specific, testable criterion 2]
+- [ ] All tests pass
+- [ ] Follows CONTRIBUTING.md guidelines
 
 ---
 
-## Implementation Notes
-
-**Affected Components:**
-- [Component 1]
-- [Component 2]
-
-**Key Considerations:**
-- [Consideration 1]
-- [Consideration 2]
-
-**Potential Challenges:**
-- [Challenge 1: description and mitigation]
-- [Challenge 2: description and mitigation]
-
----
-
-## Open Questions
-
-[If any - questions to ask maintainer]
+## Implementation Checklist
+- [ ] Fix code at [file:line]
+- [ ] Add test at [test-file]
+- [ ] Run tests - all pass
+- [ ] Run linter - no errors
+- [ ] Manual verification
 
 ---
 
 ## Next Steps
 
-✅ Analysis complete - Ready for **Phase 3: Codebase Exploration**
+✅ Analysis complete - Ready for **Phase 3: Solution Implementation**
 
-**Recommended:** Before coding, explore:
-1. [Specific file/component to understand]
-2. [Test patterns to learn]
-3. [Similar features to reference]
+**Start with:**
+1. [Specific first task - e.g., "Fix checkPassword() at validation.ts:45"]
+2. [Second task]
+3. [Third task]
 ```
 
 ## Integration with Main Framework
 
 When invoked from main framework:
 
-1. **Receive context:** Issue URL, type, initial assessment
-2. **Execute analysis:** Deep dive into requirements
-3. **Return structured breakdown:** Complete understanding
+1. **Receive context:** Issue URL, type from Phase 1
+2. **Execute integrated analysis:**
+   - Extract requirements
+   - Explore codebase structure
+   - Locate exact code to change
+   - Identify problems in code
+   - Plan modifications
+3. **Return comprehensive analysis:** Ready to implement
 4. **Update tracker:** Mark Phase 2 complete
-5. **Transition:** Prepare context for Phase 3 (codebase exploration targets)
+5. **Transition:** Phase 3 (Implementation) with concrete code-level plan
 
-Can be re-invoked if requirements change or new information emerges.
+## Common Pitfalls
 
-## Using the Template
+**Avoid:**
 
-Load `assets/templates/issue-analysis-template.md` for a blank template to fill in during analysis.
+❌ **Analyzing requirements without looking at code** - Will miss context
+❌ **Exploring code without understanding requirements** - Will get lost
+❌ **Assuming code structure** - Always verify by reading
+❌ **Stopping at "what" without finding "where"** - Need exact locations
+❌ **Ignoring existing patterns** - Must follow project conventions
+❌ **Not tracing full execution path** - Will miss side effects
+❌ **Forgetting to check tests** - Test changes are part of solution
+
+## Verification Before Implementation
+
+**Before moving to Phase 3, verify:**
+
+- [ ] Requirements fully understood
+- [ ] Codebase structure mapped
+- [ ] Exact modification points identified
+- [ ] Problem code located (for bugs)
+- [ ] Integration points clear (for features)
+- [ ] All duplications found (for refactoring)
+- [ ] Execution path traced
+- [ ] Dependencies identified
+- [ ] Test strategy planned
+- [ ] Edge cases listed
+- [ ] Impact assessed and acceptable
+
+If any unclear, dig deeper or ask maintainer.
