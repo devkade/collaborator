@@ -19,6 +19,12 @@
       "source": "./skills/oss-contribution-framework",
       "description": "Systematic 6-phase framework for contributing to open source projects from issue discovery to PR creation",
       "version": "1.0.0"
+    },
+    {
+      "name": "pkm-framework",
+      "source": "./skills/pkm-framework",
+      "description": "Comprehensive Personal Knowledge Management framework for Obsidian with temporal reviews (daily, weekly, monthly), smart capture, note linking, and analytics",
+      "version": "1.0.0"
     }
   ]
 }
